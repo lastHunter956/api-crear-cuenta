@@ -4,8 +4,8 @@ from requests import post #configuracion de la base de datos
 from sympy import hn1#configuracion de la base de datos
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from config import config
-from validaciones import *
+from src.config import config
+from src.validaciones import *
 
 app = Flask(__name__)
 

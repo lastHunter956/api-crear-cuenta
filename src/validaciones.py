@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify #importar librerias
 from flask_mysqldb import MySQL #configuracion de la base de datos
 from app import mysql
-from config import config
 #validamos para ver si la cedula qeu ingreso el usuario ya existe en la base de datos
 def validar_cedula(cedula):
     try:#el try es para que si hay un error no se caiga el programa
