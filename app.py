@@ -64,8 +64,8 @@ def post_usuario():
         if validar_cedula(cedula) and validar_correo(correo):#se usa para validar si la cedula ya existe en la base de datos
             return jsonify({'message': 'la cuenta o la cedula ya fue registrada'})#error
         else:
-            sql = """INSERT INTO heroku_978ea61906c2949.usuario(Cedula, Direccion, Nombre, Apellido, Ciudad, Pais, Contraseña) 
-            VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')""".format(cedula, request.json['Direccion'], request.json['Nombre'], request.json['Apellido'], request.json['Ciudad'], request.json['Pais'], generate_password_hash(contraseña),correo)#se usa para insertar datos en la tabla usuario''])
+            sql = """INSERT INTO heroku_978ea61906c2949.usuario(Correo,Cedula, Direccion, Nombre, Apellido, Ciudad, Pais, Contraseña) 
+            VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')""".format(correo,cedula, request.json['Direccion'], request.json['Nombre'], request.json['Apellido'], request.json['Ciudad'], request.json['Pais'], generate_password_hash(contraseña),correo)#se usa para insertar datos en la tabla usuario''])
             cursor.execute(sql)#se ejecuta la consulta
             mysql.connection.commit()#guardar los cambios
             return jsonify({'message': 'persona añadida'})#se retorna un mensaje de vehiculo añadido
