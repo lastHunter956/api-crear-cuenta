@@ -73,6 +73,17 @@ def post_usuario():
     except Exception as e:#el except es para que si hay un error no se caiga el programa
         return jsonify({'message': 'error'})#en caso de que haya un error se retorna un mensaje de error   
 
+@app.route('/signup/<cedula>', methods=['PUT'])
+def put_usuario(cedula):
+    try:#el try es para que si hay un error no se caiga el programa
+        cursor = mysql.connection.cursor()#se usa para conectar con la base de datos
+        sql = """UPDATE heroku_978ea61906c2949.usuario SET Correo='{0}', Direccion='{1}', Nombre='{2}', Apellido='{3}', Ciudad='{4}', Pais='{5}' WHERE Cedula='{6}'""".format(request.json['Correo'], request.json['Direccion'], request.json['Nombre'], request.json['Apellido'], request.json['Ciudad'], request.json['Pais'], cedula)#se usa para actualizar los datos de la tabla usuario
+        cursor.execute(sql)#se ejecuta la consulta
+        mysql.connection.commit()#guardar los cambios
+        return jsonify({'message': 'persona actualizada'})#se retorna un mensaje de persona actualizada
+    except Exception as e:
+        return jsonify({'message': 'error'})#en caso de que haya un error se retorna un mensaje de error
+
 def pagina_no_encontrada(error):
     return "<h1>Página no encontrada</h1>", 404
 
